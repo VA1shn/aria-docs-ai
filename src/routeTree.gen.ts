@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as NewSessionRouteImport } from './routes/new-session'
+import { Route as ApprovalSessionIdRouteImport } from './routes/approval.$sessionId'
 import { Route as DocumentsSessionIdRouteImport } from './routes/documents.$sessionId'
 import { Route as SessionSessionIdRouteImport } from './routes/session.$sessionId'
 
@@ -36,6 +37,11 @@ const NewSessionRoute = NewSessionRouteImport.update({
   path: '/new-session',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApprovalSessionIdRoute = ApprovalSessionIdRouteImport.update({
+  id: '/approval/$sessionId',
+  path: '/approval/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DocumentsSessionIdRoute = DocumentsSessionIdRouteImport.update({
   id: '/documents/$sessionId',
   path: '/documents/$sessionId',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   NewSessionRoute: typeof NewSessionRoute
+  ApprovalSessionIdRoute: typeof ApprovalSessionIdRoute
   DocumentsSessionIdRoute: typeof DocumentsSessionIdRoute
   SessionSessionIdRoute: typeof SessionSessionIdRoute
 }
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/approval/$sessionId': {
+      id: '/approval/$sessionId'
+      path: '/approval/$sessionId'
+      fullPath: '/approval/$sessionId'
+      preLoaderRoute: typeof ApprovalSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/documents/$sessionId': {
       id: '/documents/$sessionId'
       path: '/documents/$sessionId'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   NewSessionRoute: NewSessionRoute,
+  ApprovalSessionIdRoute: ApprovalSessionIdRoute,
   DocumentsSessionIdRoute: DocumentsSessionIdRoute,
   SessionSessionIdRoute: SessionSessionIdRoute,
 }
