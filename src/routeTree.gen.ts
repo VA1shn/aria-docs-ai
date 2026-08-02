@@ -16,6 +16,7 @@ import { Route as NewSessionRouteImport } from './routes/new-session'
 import { Route as ApprovalSessionIdRouteImport } from './routes/approval.$sessionId'
 import { Route as DocumentsSessionIdRouteImport } from './routes/documents.$sessionId'
 import { Route as SessionSessionIdRouteImport } from './routes/session.$sessionId'
+import { Route as SummarySessionIdRouteImport } from './routes/summary.$sessionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,6 +53,11 @@ const SessionSessionIdRoute = SessionSessionIdRouteImport.update({
   path: '/session/$sessionId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SummarySessionIdRoute = SummarySessionIdRouteImport.update({
+  id: '/summary/$sessionId',
+  path: '/summary/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
+  '/summary/$sessionId': typeof SummarySessionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
+  '/summary/$sessionId': typeof SummarySessionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
+  '/summary/$sessionId': typeof SummarySessionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
+    | '/summary/$sessionId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
+    | '/summary/$sessionId'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/approval/$sessionId'
     | '/documents/$sessionId'
     | '/session/$sessionId'
+    | '/summary/$sessionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   ApprovalSessionIdRoute: typeof ApprovalSessionIdRoute
   DocumentsSessionIdRoute: typeof DocumentsSessionIdRoute
   SessionSessionIdRoute: typeof SessionSessionIdRoute
+  SummarySessionIdRoute: typeof SummarySessionIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SessionSessionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/summary/$sessionId': {
+      id: '/summary/$sessionId'
+      path: '/summary/$sessionId'
+      fullPath: '/summary/$sessionId'
+      preLoaderRoute: typeof SummarySessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApprovalSessionIdRoute: ApprovalSessionIdRoute,
   DocumentsSessionIdRoute: DocumentsSessionIdRoute,
   SessionSessionIdRoute: SessionSessionIdRoute,
+  SummarySessionIdRoute: SummarySessionIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
