@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as NewSessionRouteImport } from './routes/new-session'
+import { Route as DocumentsSessionIdRouteImport } from './routes/documents.$sessionId'
 import { Route as SessionSessionIdRouteImport } from './routes/session.$sessionId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const NewSessionRoute = NewSessionRouteImport.update({
   path: '/new-session',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentsSessionIdRoute = DocumentsSessionIdRouteImport.update({
+  id: '/documents/$sessionId',
+  path: '/documents/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SessionSessionIdRoute = SessionSessionIdRouteImport.update({
   id: '/session/$sessionId',
   path: '/session/$sessionId',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/new-session': typeof NewSessionRoute
+  '/documents/$sessionId': typeof DocumentsSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
 }
 export interface FileRouteTypes {
@@ -70,6 +79,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/documents/$sessionId'
     | '/session/$sessionId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -77,6 +87,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/documents/$sessionId'
     | '/session/$sessionId'
   id:
     | '__root__'
@@ -84,6 +95,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/forgot-password'
     | '/new-session'
+    | '/documents/$sessionId'
     | '/session/$sessionId'
   fileRoutesById: FileRoutesById
 }
@@ -92,6 +104,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   NewSessionRoute: typeof NewSessionRoute
+  DocumentsSessionIdRoute: typeof DocumentsSessionIdRoute
   SessionSessionIdRoute: typeof SessionSessionIdRoute
 }
 
@@ -125,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents/$sessionId': {
+      id: '/documents/$sessionId'
+      path: '/documents/$sessionId'
+      fullPath: '/documents/$sessionId'
+      preLoaderRoute: typeof DocumentsSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/session/$sessionId': {
       id: '/session/$sessionId'
       path: '/session/$sessionId'
@@ -140,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   NewSessionRoute: NewSessionRoute,
+  DocumentsSessionIdRoute: DocumentsSessionIdRoute,
   SessionSessionIdRoute: SessionSessionIdRoute,
 }
 export const routeTree = rootRouteImport
