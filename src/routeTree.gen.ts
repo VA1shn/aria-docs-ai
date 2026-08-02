@@ -15,6 +15,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as NewSessionRouteImport } from './routes/new-session'
 import { Route as ApprovalSessionIdRouteImport } from './routes/approval.$sessionId'
 import { Route as DocumentsSessionIdRouteImport } from './routes/documents.$sessionId'
+import { Route as ExportSessionIdRouteImport } from './routes/export.$sessionId'
 import { Route as SessionSessionIdRouteImport } from './routes/session.$sessionId'
 import { Route as SummarySessionIdRouteImport } from './routes/summary.$sessionId'
 
@@ -48,6 +49,11 @@ const DocumentsSessionIdRoute = DocumentsSessionIdRouteImport.update({
   path: '/documents/$sessionId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ExportSessionIdRoute = ExportSessionIdRouteImport.update({
+  id: '/export/$sessionId',
+  path: '/export/$sessionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SessionSessionIdRoute = SessionSessionIdRouteImport.update({
   id: '/session/$sessionId',
   path: '/session/$sessionId',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/new-session': typeof NewSessionRoute
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
+  '/export/$sessionId': typeof ExportSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
   '/summary/$sessionId': typeof SummarySessionIdRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/new-session': typeof NewSessionRoute
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
+  '/export/$sessionId': typeof ExportSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
   '/summary/$sessionId': typeof SummarySessionIdRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/new-session': typeof NewSessionRoute
   '/approval/$sessionId': typeof ApprovalSessionIdRoute
   '/documents/$sessionId': typeof DocumentsSessionIdRoute
+  '/export/$sessionId': typeof ExportSessionIdRoute
   '/session/$sessionId': typeof SessionSessionIdRoute
   '/summary/$sessionId': typeof SummarySessionIdRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/new-session'
     | '/approval/$sessionId'
     | '/documents/$sessionId'
+    | '/export/$sessionId'
     | '/session/$sessionId'
     | '/summary/$sessionId'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/new-session'
     | '/approval/$sessionId'
     | '/documents/$sessionId'
+    | '/export/$sessionId'
     | '/session/$sessionId'
     | '/summary/$sessionId'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/new-session'
     | '/approval/$sessionId'
     | '/documents/$sessionId'
+    | '/export/$sessionId'
     | '/session/$sessionId'
     | '/summary/$sessionId'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   NewSessionRoute: typeof NewSessionRoute
   ApprovalSessionIdRoute: typeof ApprovalSessionIdRoute
   DocumentsSessionIdRoute: typeof DocumentsSessionIdRoute
+  ExportSessionIdRoute: typeof ExportSessionIdRoute
   SessionSessionIdRoute: typeof SessionSessionIdRoute
   SummarySessionIdRoute: typeof SummarySessionIdRoute
 }
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsSessionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/export/$sessionId': {
+      id: '/export/$sessionId'
+      path: '/export/$sessionId'
+      fullPath: '/export/$sessionId'
+      preLoaderRoute: typeof ExportSessionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/session/$sessionId': {
       id: '/session/$sessionId'
       path: '/session/$sessionId'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   NewSessionRoute: NewSessionRoute,
   ApprovalSessionIdRoute: ApprovalSessionIdRoute,
   DocumentsSessionIdRoute: DocumentsSessionIdRoute,
+  ExportSessionIdRoute: ExportSessionIdRoute,
   SessionSessionIdRoute: SessionSessionIdRoute,
   SummarySessionIdRoute: SummarySessionIdRoute,
 }
