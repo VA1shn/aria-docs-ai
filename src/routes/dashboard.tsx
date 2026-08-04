@@ -109,9 +109,9 @@ function DashboardPage() {
                 <span className="truncate text-xs font-medium text-muted-foreground">{stat.label}</span>
                 <stat.icon className="size-4 shrink-0 text-teal" />
               </div>
-              <p className="mt-2 text-2xl font-semibold tracking-tight">
+              <div className="mt-2 text-2xl font-semibold tracking-tight">
                 {sessions ? stat.value : <Skeleton className="h-7 w-8" />}
-              </p>
+              </div>
             </div>
           ))}
         </div>
